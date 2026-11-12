@@ -1,0 +1,30 @@
+app:
+  database:
+    port: 5432
+    name: ${DB_NAME:epa_db}
+    url-prefix: jdbc:postgresql://${app.database.host}:${app.database.port}/
+    auto-create: false
+
+spring:
+  profiles:
+    default: local
+
+  datasource:
+    url: "${app.database.url-prefix}${app.database.name}"
+    username: "${DB_USERNAME:postgres}"
+    password: "${DB_PASSWORD:}"
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        # Loads lazy many-to-one references in batches instead of one query per row,
+        # which keeps page-based dashboards from issuing one select per reservation.
+        default_batch_fetch_size: 50
+
+  data:
+    web:
+      pageable:
+        max-page-size: 100

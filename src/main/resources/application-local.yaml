@@ -1,0 +1,8 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+
+app:
+  database:
+    host: localhost
+    auto-create: true
