@@ -1,0 +1,12 @@
+# Build output and VCS data: never part of the build context
+target
+.git
+
+# Secrets and local environment: must never reach the Docker daemon
+.env
+secrets/
+
+# Editor noise
+.idea
+*.iml
+*.log
