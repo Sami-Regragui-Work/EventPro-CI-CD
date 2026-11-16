@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: postgres:18.6
+
+    environment:
+      POSTGRES_DB: epa_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+
+    secrets:
+      - db_password
+
+    volumes:
+      - pgdata:/var/lib/postgresql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d epa_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  api:
+    build: .
+    image: eventpro-api:dev
+
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+    secrets:
+      - source: db_password
+        target: spring.datasource.password
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+secrets:
+  db_password:
+    file: ./secrets/db.password.txt
+
+volumes:
+  pgdata:
