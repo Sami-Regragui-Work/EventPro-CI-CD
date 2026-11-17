@@ -1,0 +1,17 @@
+configuration-as-code
+workflow-aggregator
+docker-workflow
+git
+github
+job-dsl
+junit
+jacoco
+sonar
+credentials-binding
+pipeline-stage-view
+timestamper
+build-timeout
+ws-cleanup
+matrix-auth
+antisamy-markup-formatter
+htmlpublisher

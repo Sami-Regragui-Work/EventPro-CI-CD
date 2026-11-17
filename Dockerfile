@@ -33,7 +33,7 @@ RUN ./mvnw -q clean package -DskipTests
 
 # =============================================================================
 
-# STAGE 2/2 — RUNTIME (this is the image you ship)
+# STAGE 2 — RUNTIME (this is the image you ship)
 # JRE only: no compiler, no Maven, no sources, no dependency cache.
 FROM eclipse-temurin:25-jre
 

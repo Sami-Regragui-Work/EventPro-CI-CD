@@ -33,5 +33,6 @@ build/
 .vscode/
 
 .env
-secrets/db.password.txt
+secrets/*.txt
+!secrets/*.example.txt
 scripts/
